@@ -1,0 +1,6 @@
+duckdb
+pandas
+dbt-duckdb
+ipykernel
+faker
+openpyxl
