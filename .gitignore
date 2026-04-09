@@ -3,19 +3,16 @@
 *.duckdb
 *.duckdb.wal
 
-# dbt
-target/
-dbt_packages/
-logs/
-
 # Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 
-# Secrets and Internal Data
-*internal*
-.streamlit/secrets.toml
+# Environment and Secrets
 .env
 salt.txt
+.streamlit/secrets.toml
+
+# Internal Data
+*internal*

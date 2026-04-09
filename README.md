@@ -1,53 +1,37 @@
-# Professional Data Warehouse (Portfolio Project)
+# Data Warehouse - Portfolio Project
 
-A production-grade local data warehouse pipeline using **DuckDB**, **dbt**, and **MotherDuck**, implementing a **Medallion Architecture** (Bronze / Silver / Gold) with an emphasis on **Public-Safe Anonymization**.
+A production-grade local data warehouse pipeline using DuckDB and MotherDuck, implementing a Medallion Architecture (Bronze, Silver, and Gold layers) with a focus on public-ready data anonymization.
 
----
+## Architecture and Anonymization Strategy
 
-## 🏗️ Medallion Architecture & Anonymization Strategy
+This pipeline transforms project data into a structurally faithful, public-ready warehouse while ensuring privacy and reproducibility.
 
-This pipeline transforms sensitive project data into a structurally faithful, public-ready portfolio warehouse.
+1. **Source Layer**: Local initial state.
+2. **Bronze Layer**: Raw data anonymized using hashing for relational integrity and synthetic data generation for PII removal.
+3. **Silver Layer**: Standardized and cleaned data processed via SQL/DuckDB.
+4. **Gold Layer**: Curated analytical models optimized for reporting and downstream applications.
+5. **MotherDuck Sync**: Final publishing layer for cloud-based accessibility.
 
-1. **Source (Sensitive)** ➡️ `warehouse.db` (Local initial state).
-2. **Bronze (Anonymized Raw)** ➡️ `data/bronze/*.parquet`.
-   *   **Hashing**: Primary and Foreign Keys are deterministically hashed (SHA-256 with salt) to preserve relational integrity.
-   *   **Date Shifting**: Temporal patterns are maintained but shifted per entity for privacy.
-   *   **Synthetic Data**: Names, emails, and sensitive strings are replaced using **Faker**.
-   *   **Numeric Scaling**: Financial metrics and KPIs are scaled (0.9x-1.1x) with added noise.
-3. **Silver (Standardized dbt)** ➡️ DuckDB `silver` schema.
-   *   Data cleaning, casting, and renaming to public-safe conventions.
-4. **Gold (Curated dbt)** ➡️ DuckDB `gold` schema.
-   *   Final analytical models supporting downstream apps and dashboards.
-5. **MotherDuck (Cloud)** ➡️ Final publishing layer for the portfolio.
+## Tech Stack
+- **Database Engine**: DuckDB
+- **Cloud Interface**: MotherDuck
+- **Processing**: Python (Pandas, PyArrow)
+- **Data Format**: Parquet
 
-## 🛠️ Tech Stack
--   **Engine**: DuckDB (Local OLAP)
--   **Transformations**: dbt (Data Build Tool)
--   **Anonymization**: Python (Pandas/Faker/Hashlib)
--   **Cloud Hosting**: MotherDuck
+## Project Structure
+- **/data/gold**: Final analytical Parquet files.
+- **/duckdb**: Local warehouse database storage.
+- **/pipeline**: Core synchronization scripts (e.g., gold_sync.py).
 
-## 🚀 Execution Flow
-
-1. **Anonymization & Ingestion**:
+## Setup and Execution
+1. Install dependencies:
    ```bash
-   python v_01_ingest_and_anonymize.py
+   pip install -r requirements.txt
    ```
-2. **dbt Transformations**:
+2. Run the synchronization pipeline:
    ```bash
-   cd dbt
-   dbt run --profiles-dir .
-   ```
-3. **MotherDuck Sync**:
-   ```bash
-   python migrate_to_md.py
+   python pipeline/gold_sync.py
    ```
 
-## 📂 Project Structure
--   `/data/bronze`: Anonymized parquet files (The "Public Raw" source).
--   `/dbt`: dbt project (staging/marts models).
--   `/duckdb`: Local warehouse storage (`warehouse.db`).
--   `/utils`: Python utilities (anonymizer, profiler).
-
----
-> [!IMPORTANT]
-> This project is designed to be **Public-Safe**. No raw PII or sensitive business financials are stored in the final repository or MotherDuck instance.
+## Disclaimer
+This project is designed for public demonstration. No private PII or sensitive business financials are stored in this repository or the connected MotherDuck instance.
