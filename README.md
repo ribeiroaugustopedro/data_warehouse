@@ -11,6 +11,7 @@ This pipeline transforms project data into a structurally faithful, public-ready
 3. **Silver Layer**: Standardized and cleaned data processed via SQL/DuckDB.
 4. **Gold Layer**: Curated analytical models optimized for reporting and downstream applications.
 5. **MotherDuck Sync**: Final publishing layer for cloud-based accessibility.
+6. **Code Hygiene**: Optimized repository structure with removal of redundant artifacts.
 
 ## Tech Stack
 - **Database Engine**: DuckDB
