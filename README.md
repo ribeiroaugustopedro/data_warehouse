@@ -1,38 +1,28 @@
-# Data Warehouse - Portfolio Project
+# Data Warehouse - Sync Engine
 
-A production-grade local data warehouse pipeline using DuckDB and MotherDuck, implementing a Medallion Architecture (Bronze, Silver, and Gold layers) with a focus on public-ready data anonymization.
+A production-centric data warehouse focused on high-fidelity healthcare network synchronization. This module serves as the primary data hub for the Network Planner platform.
 
-## Architecture and Anonymization Strategy
+## Core Purpose
+This module manages the storage and cloud distribution of professional network datasets:
 
-This pipeline transforms project data into a structurally faithful, public-ready warehouse while ensuring privacy and reproducibility.
-
-1. **Source Layer**: Local initial state.
-2. **Bronze Layer**: Raw data anonymized using hashing for relational integrity and synthetic data generation for PII removal.
-3. **Silver Layer**: Standardized and cleaned data processed via SQL/DuckDB.
-4. **Gold Layer**: Curated analytical models optimized for reporting and downstream applications.
-5. **MotherDuck Sync**: Final publishing layer for cloud-based accessibility.
-6. **Code Hygiene**: Optimized repository structure with removal of redundant artifacts.
-
-## Tech Stack
-- **Database Engine**: DuckDB
-- **Cloud Interface**: MotherDuck
-- **Processing**: Python (Pandas, PyArrow)
-- **Data Format**: Parquet
+1. **Warehouse Storage**: Managed via DuckDB (`warehouse.db`), containing 587k+ members with optimized geographic distributions.
+2. **Cloud Distribution**: `gold_sync.py` manages the seamless integration with MotherDuck for global cloud accessibility.
+3. **Standards**: Strict uppercase naming conventions and Pareto-distributed market weights are already baked into the synchronized gold layer.
 
 ## Project Structure
-- **/data/gold**: Final analytical Parquet files.
-- **/duckdb**: Local warehouse database storage.
-- **/pipeline**: Core synchronization scripts (e.g., gold_sync.py).
+- **/duckdb**: Production database (`warehouse.db`).
+- **/pipeline**: Core sync engine (`gold_sync.py`).
+- **/data/gold**: Final Parquet exports.
 
-## Setup and Execution
-1. Install dependencies:
+## How to Sync
+1. Install requirements:
    ```bash
    pip install -r requirements.txt
    ```
-2. Run the synchronization pipeline:
+2. Execute MotherDuck upload:
    ```bash
    python pipeline/gold_sync.py
    ```
 
-## Disclaimer
-This project is designed for public demonstration. No private PII or sensitive business financials are stored in this repository or the connected MotherDuck instance.
+## Technical Note
+This repository contains prepared high-fidelity data. Development scripts used for the initial population generation have been purged to maintain a clean, production-ready state.

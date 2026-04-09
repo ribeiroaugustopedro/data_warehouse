@@ -1,18 +1,19 @@
-# DuckDB
-*.db
-*.duckdb
-*.duckdb.wal
-
-# Python
+# Python Caches
 __pycache__/
 *.py[cod]
+*$py.class
 .venv/
 venv/
-
-# Environment and Secrets
+env/
 .env
-salt.txt
-.streamlit/secrets.toml
 
-# Internal Data
-*internal*
+# Data & Databases
+duckdb/*.db
+duckdb/*.wal
+data/
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+*.Zone.Identifier
