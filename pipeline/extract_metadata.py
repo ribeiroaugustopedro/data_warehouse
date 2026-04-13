@@ -11,7 +11,7 @@ WEBSITE_DATA_DIR = PROJECT_ROOT.parent / "portfolio_website" / "src" / "data"
 METADATA_FILE = WEBSITE_DATA_DIR / "catalog_metadata.json"
 
 # Token from env or default
-MOTHERDUCK_TOKEN = os.getenv("MOTHERDUCK_TOKEN", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpYmVpcm9hdWd1c3RvcGVkcm9AZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6InJpYmVpcm9hdWd1c3RvcGVkcm8uZ21haWwuY29tIiwicGF0IjoiUXZaOWowb2U0WlVSUlowNW84QmdXaTF3ek94LTduVFE3TnkwaDNOMUQ1NCIsInVzZXJJZCI6IjlkZjZmMmVjLTNjYWYtNDRmZC05NzA0LWU4OTdjMDcyYjExZSIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc3NTQ4NjE0MX0.HMNMkFOiAT0TOqI6XsddmcBvaEE-AZDIjxCy4b6YDhc")
+MOTHERDUCK_TOKEN = os.getenv("MOTHERDUCK_TOKEN")
 
 def extract_metadata():
     print(f"[{datetime.now()}] Connecting to MotherDuck...")
